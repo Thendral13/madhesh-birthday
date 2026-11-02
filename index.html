@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Dearest Madhesh | Nov 17 ❤️</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#07090e',
+                        deepViolet: '#0f111a',
+                        gold: {
+                            100: '#fff7ed',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#f7d070',
+                            500: '#e2b04c',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                        },
+                        champagne: '#f5e6ca',
+                        roseGold: '#e8b4b8',
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        cursive: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow-pulse': 'glowPulse 3s ease-in-out infinite',
+                        'flicker': 'flicker 1.4s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-14px)' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { filter: 'drop-shadow(0 0 12px rgba(247, 208, 112, 0.3))' },
+                            '50%': { filter: 'drop-shadow(0 0 28px rgba(247, 208, 112, 0.75))' },
+                        },
+                        flicker: {
+                            '0%': { transform: 'scale(1) rotate(-1deg)', opacity: '0.9' },
+                            '50%': { transform: 'scale(1.12) rotate(1.5deg)', opacity: '1' },
+                            '100%': { transform: 'scale(0.92) rotate(-2deg)', opacity: '0.85' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+       body {
+    background-color: #07090e;
+    background-image: linear-gradient(
+        rgba(7, 9, 14, 0.75),
+        rgba(7, 9, 14, 0.85)
+    ), url('images/background.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; /* Picture moves when you scroll */
+    background-repeat: no-repeat;
+
+    color: #f3f4f6;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(15, 17, 26, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(247, 208, 112, 0.18);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .glass-card {
+            background: rgba(22, 26, 39, 0.45);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(247, 208, 112, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(247, 208, 112, 0.55);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(226, 176, 76, 0.2);
+        }
+
+        /* Text Gradients */
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #ffffff 0%, #f7d070 45%, #e2b04c 80%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-rose {
+            background: linear-gradient(135deg, #ffffff 0%, #f43f5e 50%, #be123c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 3D Flip Cards */
+        .flip-card {
+            perspective: 1000px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1.25rem;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Animated Flame */
+        .flame {
+            width: 16px;
+            height: 28px;
+            background: linear-gradient(to top, #ff3300, #ffae00, #ffffff);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 18px #ffae00, 0 0 30px #ff3300;
+            animation: flicker 1.2s infinite alternate;
+            transform-origin: center bottom;
+        }
+
+        .flame.off {
+            display: none;
+        }
+
+        /* Envelope Styles */
+        .envelope-lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 240px solid transparent;
+            border-right: 240px solid transparent;
+            border-top: 150px solid #1e2436;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 3;
+        }
+
+        .envelope.open .envelope-lid {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        /* Equalizer Animation */
+        .eq-bar {
+            width: 3px;
+            background-color: #f7d070;
+            border-radius: 3px;
+            animation: eqAnimation 0.8s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(1) { height: 10px; animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { height: 22px; animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { height: 14px; animation-delay: 0.2s; }
+        .eq-bar:nth-child(4) { height: 18px; animation-delay: 0.4s; }
+
+        @keyframes eqAnimation {
+            0% { transform: scaleY(0.3); }
+            100% { transform: scaleY(1.15); }
+        }
+
+        .paused .eq-bar {
+            animation-play-state: paused;
+            transform: scaleY(0.2);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07090e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2538;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e2b04c;
+        }
+    </style>
+</head>
+<body class="relative selection:bg-gold-500 selection:text-midnight">
+
+    <!-- Interactive Background Canvas -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- INITIAL OVERLAY ENTRY GATEWAY -->
+    <div id="welcomeOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight/95 backdrop-blur-2xl transition-opacity duration-700">
+        <div class="glass-panel p-8 md:p-12 rounded-3xl max-w-lg w-full text-center border border-gold-400/30 shadow-2xl relative overflow-hidden">
+            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-tr from-gold-500 to-amber-200 flex items-center justify-center text-midnight text-3xl shadow-lg shadow-gold-500/20 animate-bounce">
+                <i class="fa-solid fa-gift font-bold"></i>
+            </div>
+            <p class="font-serif text-xs uppercase tracking-widest text-gold-400 mb-2">Designed by Tamil Thendral</p>
+            <h2 class="font-serif text-3xl md:text-4xl font-extrabold text-gradient-gold mb-3">Happy Birthday, Madhesh!</h2>
+            <p class="text-slate-300 text-sm md:text-base mb-8 leading-relaxed font-light">
+                A bespoke, immersive luxury experience dedicated to my wonderful husband. Tap below to begin your surprise. 🎵✨
+            </p>
+            <button id="unlockBtn" class="w-full py-4 px-8 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-amber-600 text-midnight font-bold text-lg shadow-xl shadow-gold-500/30 hover:shadow-gold-500/50 hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-heart"></i> Open Your Birthday Gift
+            </button>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-40 px-4 py-4 transition-all duration-300">
+        <div class="max-w-6xl mx-auto glass-panel rounded-full px-6 py-3 flex items-center justify-between">
+            <a href="#" class="flex flex-col">
+                <span class="font-serif text-lg md:text-xl text-gold-400 font-bold tracking-wider">MADHESH</span>
+                <span class="font-cursive text-xs text-rose-300 -mt-1">Designed by Tamil Thendral ❤️</span>
+            </a>
+            
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#hero" class="hover:text-gold-400 transition-colors">Home</a>
+                <a href="#constellation" class="hover:text-gold-400 transition-colors">Love Constellation</a>
+                <a href="#reasons" class="hover:text-gold-400 transition-colors">Why I Love You</a>
+                <a href="#letter" class="hover:text-gold-400 transition-colors">Letter</a>
+                <a href="#cake" class="hover:text-gold-400 transition-colors">Make a Wish</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-gold-400 text-xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden max-w-6xl mx-auto mt-2 glass-panel rounded-2xl p-4 flex-col gap-3 text-center text-sm font-medium text-slate-300">
+            <a href="#hero" class="py-2 hover:text-gold-400 transition-colors mobile-link">Home</a>
+            <a href="#constellation" class="py-2 hover:text-gold-400 transition-colors mobile-link">Love Constellation</a>
+            <a href="#reasons" class="py-2 hover:text-gold-400 transition-colors mobile-link">Why I Love You</a>
+            <a href="#letter" class="py-2 hover:text-gold-400 transition-colors mobile-link">Letter</a>
+            <a href="#cake" class="py-2 hover:text-gold-400 transition-colors mobile-link">Make a Wish</a>
+        </div>
+    </nav>
+
+    <!-- FLOATING MUSIC PLAYER -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <div class="glass-panel px-4 py-3 rounded-2xl flex items-center gap-3 border border-gold-400/25 shadow-2xl">
+            <div id="visualizer" class="flex items-end gap-1 h-6 px-1 paused">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+            </div>
+
+            <button id="playPauseBtn" class="w-10 h-10 rounded-full bg-gold-400 text-midnight flex items-center justify-center font-bold shadow-md hover:scale-105 active:scale-95 transition-all">
+                <i class="fa-solid fa-play" id="playIcon"></i>
+            </button>
+
+            <div class="hidden sm:flex flex-col pr-2">
+                <span class="text-xs font-semibold text-gold-300">Romantic Melody</span>
+                <span class="text-[10px] text-slate-400">Playing for Madhesh</span>
+            </div>
+
+            <button id="volumeBtn" class="text-slate-400 hover:text-gold-400 text-sm px-1">
+                <i class="fa-solid fa-volume-high" id="volumeIcon"></i>
+            </button>
+        </div>
+    </div>
+
+    
+    <!-- AUDIO SOURCE - Your own music from the audio folder -->
+<audio id="bgAudio" loop preload="auto">
+    <source src="audio/your-song-name.mp3" type="audio/mpeg">
+</audio>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-28 pb-16 px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-card border border-gold-400/30 mb-8 animate-glow-pulse">
+                <i class="fa-solid fa-crown text-gold-400 text-sm"></i>
+                <span class="text-xs md:text-sm font-semibold tracking-widest text-gold-300 uppercase">November 17 • A Regal Celebration</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-tight">
+                Happy Birthday, <br class="hidden sm:inline">
+                <span class="text-gradient-gold drop-shadow-2xl">Madhesh</span> ❤️
+            </h1>
+
+            <p class="font-cursive text-3xl md:text-5xl text-rose-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+                "To the king of my heart, my greatest strength, and my forever love."
+            </p>
+
+            <p class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Created with all my heart by <span class="text-gold-400 font-semibold">Tamil Thendral</span>, to celebrate the incredible husband you are every single day.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-5">
+                <a href="#constellation" class="px-8 py-4 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-amber-600 text-midnight font-bold text-sm shadow-xl shadow-gold-500/20 hover:shadow-gold-500/40 hover:scale-105 active:scale-95 transition-all">
+                    Explore Love Map <i class="fa-solid fa-compass ml-1"></i>
+                </a>
+                <a href="#cake" class="px-8 py-4 rounded-full glass-card text-gold-300 font-semibold text-sm hover:text-gold-200 hover:border-gold-400/50 hover:scale-105 active:scale-95 transition-all">
+                    Make a Wish 🎂
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE CONSTELLATION / LOVE MAP -->
+    <section id="constellation" class="py-24 px-4 relative z-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-gradient-gold mb-4">Our Love Constellation</h2>
+            <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base">Tap on the glowing celestial nodes to reveal our memorable milestones.</p>
+        </div>
+
+        <div class="glass-panel rounded-3xl p-6 md:p-10 relative overflow-hidden min-h-[420px] flex items-center justify-center border border-gold-400/25">
+            <svg id="constellationSvg" class="w-full h-[380px] absolute inset-0 pointer-events-auto cursor-pointer">
+                <!-- Lines connected dynamically via JavaScript -->
+            </svg>
+            
+            <div id="constellationNodes" class="relative z-10 w-full h-[340px] flex flex-wrap items-center justify-around gap-6">
+                <!-- Nodes generated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONSTELLATION MILESTONE MODAL -->
+    <div id="milestoneModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight/90 backdrop-blur-xl hidden opacity-0 transition-all duration-300">
+        <div class="glass-panel p-6 md:p-8 rounded-3xl max-w-lg w-full border border-gold-400/30 relative">
+            <button onclick="closeMilestoneModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                <i class="fa-solid fa-star" id="modalIcon"></i>
+            </div>
+            <span id="milestoneDate" class="text-xs font-semibold text-gold-400 uppercase tracking-widest"></span>
+            <h3 id="milestoneTitle" class="font-serif text-2xl font-bold text-slate-100 my-2"></h3>
+            <p id="milestoneDesc" class="text-slate-300 text-sm leading-relaxed mt-2 font-light"></p>
+        </div>
+    </div>
+
+    <!-- REASONS WHY I LOVE YOU (3D FLIP CARDS) -->
+    <section id="reasons" class="py-24 px-4 relative z-10 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-gradient-gold mb-4">Why I Love You</h2>
+            <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base">Tap on any card to flip and discover my sweet notes to you.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="flip-card h-56 cursor-pointer" onclick="toggleFlip(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-slate-200">Your Loving Heart</h3>
+                        <span class="text-xs text-gold-400 mt-2">Tap to flip 💫</span>
+                    </div>
+                    <div class="flip-card-back glass-panel p-6 flex flex-col items-center justify-center text-center border border-gold-400/40">
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "The boundless kindness and love you shower on me every single day makes my world complete."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card h-56 cursor-pointer" onclick="toggleFlip(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-face-smile-beam"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-slate-200">Your Radiance</h3>
+                        <span class="text-xs text-gold-400 mt-2">Tap to flip 💫</span>
+                    </div>
+                    <div class="flip-card-back glass-panel p-6 flex flex-col items-center justify-center text-center border border-gold-400/40">
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "Your smile has a magical power to turn my cloudiest days into bright, warm sunshine."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card h-56 cursor-pointer" onclick="toggleFlip(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-slate-200">My Safe Haven</h3>
+                        <span class="text-xs text-gold-400 mt-2">Tap to flip 💫</span>
+                    </div>
+                    <div class="flip-card-back glass-panel p-6 flex flex-col items-center justify-center text-center border border-gold-400/40">
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "In your arms, I have found my home, my comfort, and my absolute peace."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card h-56 cursor-pointer" onclick="toggleFlip(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-fire text-amber-400"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-slate-200">Your Ambition</h3>
+                        <span class="text-xs text-gold-400 mt-2">Tap to flip 💫</span>
+                    </div>
+                    <div class="flip-card-back glass-panel p-6 flex flex-col items-center justify-center text-center border border-gold-400/40">
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "I admire your dedication, your strength, and how passionately you pursue your dreams."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card h-56 cursor-pointer" onclick="toggleFlip(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-hands-holding-child"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-slate-200">Unwavering Support</h3>
+                        <span class="text-xs text-gold-400 mt-2">Tap to flip 💫</span>
+                    </div>
+                    <div class="flip-card-back glass-panel p-6 flex flex-col items-center justify-center text-center border border-gold-400/40">
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "Thank you for being my constant anchor and my greatest cheerleader in everything."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card h-56 cursor-pointer" onclick="toggleFlip(this)">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front glass-card p-6 flex flex-col items-center justify-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-gold-400/10 text-gold-400 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-gem"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-slate-200">Simply Madhesh</h3>
+                        <span class="text-xs text-gold-400 mt-2">Tap to flip 💫</span>
+                    </div>
+                    <div class="flip-card-back glass-panel p-6 flex flex-col items-center justify-center text-center border border-gold-400/40">
+                        <p class="text-slate-200 text-sm leading-relaxed">
+                            "Because you are uniquely you—the best husband Tamil Thendral could ever ask for!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- WAX SEAL LOVE LETTER SECTION -->
+    <section id="letter" class="py-24 px-4 relative z-10 max-w-4xl mx-auto text-center">
+        <div class="mb-12">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-gradient-gold mb-4">A Note From Tamil Thendral</h2>
+            <p class="text-slate-400 max-w-md mx-auto text-sm md:text-base">Tap the wax seal to open your handwritten love letter.</p>
+        </div>
+
+        <div class="flex justify-center items-center">
+            <div id="envelope" class="envelope relative w-full max-w-md h-64 glass-panel rounded-2xl flex items-center justify-center cursor-pointer border border-gold-400/30 shadow-2xl transition-transform hover:scale-[1.02]" onclick="openEnvelope()">
+                <div class="envelope-lid"></div>
+                <div id="waxSeal" class="z-10 w-20 h-20 rounded-full bg-gradient-to-tr from-rose-700 via-rose-600 to-amber-500 flex items-center justify-center shadow-2xl border-2 border-gold-300">
+                    <i class="fa-solid fa-heart text-gold-100 text-2xl animate-pulse"></i>
+                </div>
+                <div class="absolute bottom-4 text-xs text-gold-300 font-semibold tracking-wider">TAP TO UNSEAL NOTE</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOVE LETTER MODAL -->
+    <div id="letterModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-midnight/90 backdrop-blur-xl hidden opacity-0 transition-all duration-500">
+        <div class="glass-panel p-8 md:p-12 rounded-3xl max-w-2xl w-full border border-gold-400/40 relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeLetterModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <span class="font-cursive text-3xl md:text-4xl text-gold-400">My Beloved Madhesh,</span>
+            </div>
+
+            <div class="space-y-4 text-slate-200 text-sm md:text-base leading-relaxed font-light text-justify">
+                <p>
+                    Happy Birthday to my incredible husband! On this special day, November 17, my heart is overflowing with love, gratitude, and pride for the wonderful man you are.
+                </p>
+                <p>
+                    Every single day spent with you is a gift I hold dear. You fill our lives with joy, calm, strength, and pure happiness. Thank you for being my anchor, my confidant, and my best friend.
+                </p>
+                <p>
+                    May this new year bring you boundless success, good health, continuous growth, and all the dreams your heart desires. I promise to stand by you, cheer for you, and love you endlessly through it all.
+                </p>
+            </div>
+
+            <div class="mt-8 text-right font-cursive text-3xl text-rose-300">
+                Forever & Always,<br>
+                <span class="text-gold-400">Tamil Thendral ❤️</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SURPRISE CANDLE & CAKE CANAL -->
+    <section id="cake" class="py-24 px-4 relative z-10 max-w-4xl mx-auto text-center">
+        <div class="mb-12">
+            <h2 class="font-serif text-3xl md:text-5xl font-bold text-gradient-gold mb-4">Make a Wish, Madhesh!</h2>
+            <p class="text-slate-400 max-w-md mx-auto text-sm md:text-base">Tap on the candle flames to blow them out and trigger a gold confetti blast!</p>
+        </div>
+
+        <div class="glass-panel p-8 md:p-12 rounded-3xl border border-gold-400/25 max-w-xl mx-auto relative overflow-hidden">
+            <div class="relative w-64 h-64 mx-auto flex flex-col items-center justify-end pb-4">
+                
+                <!-- Candle Elements -->
+                <div class="flex justify-center gap-6 mb-2 z-20">
+                    <div class="relative cursor-pointer" onclick="blowCandle(this)">
+                        <div class="flame" id="flame1"></div>
+                        <div class="w-3 h-14 bg-gradient-to-t from-rose-500 to-amber-200 rounded-t-sm shadow-md"></div>
+                    </div>
+                    <div class="relative cursor-pointer" onclick="blowCandle(this)">
+                        <div class="flame" id="flame2"></div>
+                        <div class="w-3 h-16 bg-gradient-to-t from-gold-400 to-yellow-100 rounded-t-sm shadow-md"></div>
+                    </div>
+                    <div class="relative cursor-pointer" onclick="blowCandle(this)">
+                        <div class="flame" id="flame3"></div>
+                        <div class="w-3 h-14 bg-gradient-to-t from-rose-500 to-amber-200 rounded-t-sm shadow-md"></div>
+                    </div>
+                </div>
+
+                <!-- Cake Structure -->
+                <div class="w-40 h-16 bg-gradient-to-r from-amber-800 via-amber-900 to-amber-950 rounded-t-2xl relative shadow-md border-t-2 border-gold-400/50 flex items-center justify-center">
+                    <span class="font-serif text-gold-300 font-bold tracking-widest text-sm">MADHESH</span>
+                </div>
+                <div class="w-56 h-20 bg-gradient-to-r from-amber-950 via-slate-900 to-midnight rounded-b-2xl relative shadow-2xl border-t border-gold-400/20 flex items-center justify-center">
+                    <div class="w-full flex justify-around px-4">
+                        <span class="text-xs text-rose-300">❤️</span>
+                        <span class="text-xs text-gold-400">✨</span>
+                        <span class="text-xs text-rose-300">❤️</span>
+                    </div>
+                </div>
+                <div class="w-64 h-4 bg-slate-800 rounded-full shadow-2xl mt-1"></div>
+
+            </div>
+
+            <button id="celebrateBtn" class="mt-8 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-amber-600 text-midnight font-bold text-sm shadow-xl shadow-gold-500/20 hover:scale-105 active:scale-95 transition-all">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Relight Candles & Celebrate
+            </button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-4 relative z-10 border-t border-slate-800/80 text-center">
+        <p class="font-serif text-lg text-gold-400 mb-1">Happy Birthday Madhesh</p>
+        <p class="font-cursive text-2xl text-rose-300 mb-3">With endless love, Tamil Thendral</p>
+        <p class="text-[10px] text-slate-500 uppercase tracking-widest">November 17 • A Regal Celebration</p>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+        /* ----------------------------------------------------
+           PARTICLE & STAR CANVAS
+        ---------------------------------------------------- */
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.7 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(247, 208, 112, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor(window.innerWidth / 16);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        /* ----------------------------------------------------
+           CONSTELLATION / LOVE MAP GENERATOR
+        ---------------------------------------------------- */
+        const milestones = [
+            { title: 'The First Chapter', date: 'Oct 2, 2023', icon: 'fa-heart', desc: 'The magical day our paths crossed, and a sweet conversation sparked a lifelong connection.' },
+            { title: 'A Lifetime Promise', date: 'Nov 25, 2024', icon: 'fa-gem', desc: 'The unforgettable moment when saying YES to forever with you filled my heart with endless joy.' },
+            { title: 'Family Blessings', date: 'Sept 2025', icon: 'fa-hands-holding-circle', desc: 'Uniting our families and receiving warmth, love, and endless blessings for our journey.' },
+            { title: 'Birthday Celebration', date: 'Nov 17', icon: 'fa-crown', desc: 'Celebrating the incredible husband you are today and every single day! Happy Birthday, Madhesh!' }
+        ];
+
+        const constellationNodesContainer = document.getElementById('constellationNodes');
+        const svg = document.getElementById('constellationSvg');
+
+        function renderConstellation() {
+            constellationNodesContainer.innerHTML = '';
+            svg.innerHTML = '';
+
+            milestones.forEach((m, idx) => {
+                const node = document.createElement('div');
+                node.className = `glass-card p-4 rounded-2xl flex flex-col items-center justify-center text-center cursor-pointer group hover:scale-110 transition-transform duration-300 border border-gold-400/30 shadow-lg w-36 h-36 z-10`;
+                node.setAttribute('onclick', `openMilestoneModal(${idx})`);
+                node.innerHTML = `
+                    <div class="w-10 h-10 rounded-full bg-gold-400/20 text-gold-400 flex items-center justify-center text-lg mb-2 group-hover:bg-gold-400 group-hover:text-midnight transition-colors">
+                        <i class="fa-solid ${m.icon}"></i>
+                    </div>
+                    <span class="text-[10px] text-gold-300 font-bold tracking-wider uppercase">${m.date}</span>
+                    <span class="text-xs font-serif font-bold text-slate-100 mt-1 line-clamp-1">${m.title}</span>
+                `;
+                constellationNodesContainer.appendChild(node);
+            });
+
+            setTimeout(drawConstellationLines, 100);
+        }
+
+        function drawConstellationLines() {
+            svg.innerHTML = '';
+            const nodes = constellationNodesContainer.children;
+            if (nodes.length < 2) return;
+
+            const svgRect = svg.getBoundingClientRect();
+
+            for (let i = 0; i < nodes.length - 1; i++) {
+                const rect1 = nodes[i].getBoundingClientRect();
+                const rect2 = nodes[i + 1].getBoundingClientRect();
+
+                const x1 = rect1.left + rect1.width / 2 - svgRect.left;
+                const y1 = rect1.top + rect1.height / 2 - svgRect.top;
+                const x2 = rect2.left + rect2.width / 2 - svgRect.left;
+                const y2 = rect2.top + rect2.height / 2 - svgRect.top;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', x1);
+                line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2);
+                line.setAttribute('y2', y2);
+                line.setAttribute('stroke', '#f7d070');
+                line.setAttribute('stroke-width', '2');
+                line.setAttribute('stroke-dasharray', '6 6');
+                line.setAttribute('opacity', '0.6');
+
+                svg.appendChild(line);
+            }
+        }
+
+        window.addEventListener('resize', drawConstellationLines);
+        renderConstellation();
+
+        /* ----------------------------------------------------
+           MILESTONE MODAL
+        ---------------------------------------------------- */
+        const milestoneModal = document.getElementById('milestoneModal');
+        const milestoneTitle = document.getElementById('milestoneTitle');
+        const milestoneDate = document.getElementById('milestoneDate');
+        const milestoneDesc = document.getElementById('milestoneDesc');
+        const modalIcon = document.getElementById('modalIcon');
+
+        function openMilestoneModal(idx) {
+            const m = milestones[idx];
+            milestoneTitle.textContent = m.title;
+            milestoneDate.textContent = m.date;
+            milestoneDesc.textContent = m.desc;
+            modalIcon.className = `fa-solid ${m.icon}`;
+
+            milestoneModal.classList.remove('hidden');
+            setTimeout(() => {
+                milestoneModal.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeMilestoneModal() {
+            milestoneModal.classList.add('opacity-0');
+            setTimeout(() => {
+                milestoneModal.classList.add('hidden');
+            }, 300);
+        }
+
+        /* ----------------------------------------------------
+           AUDIO CONTROLLER
+        ---------------------------------------------------- */
+        const audio = document.getElementById('bgAudio');
+        const unlockBtn = document.getElementById('unlockBtn');
+        const welcomeOverlay = document.getElementById('welcomeOverlay');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = document.getElementById('playIcon');
+        const visualizer = document.getElementById('visualizer');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeIcon = document.getElementById('volumeIcon');
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    playIcon.className = "fa-solid fa-pause";
+                    visualizer.classList.remove('paused');
+                }).catch(err => console.log("Playback blocked:", err));
+            } else {
+                audio.pause();
+                playIcon.className = "fa-solid fa-play";
+                visualizer.classList.add('paused');
+            }
+        }
+
+        unlockBtn.addEventListener('click', () => {
+            toggleAudio();
+            welcomeOverlay.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                welcomeOverlay.style.display = 'none';
+            }, 700);
+
+            confetti({
+                particleCount: 100,
+                spread: 80,
+                origin: { y: 0.6 }
+            });
+        });
+
+        playPauseBtn.addEventListener('click', toggleAudio);
+
+        volumeBtn.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            if (audio.muted) {
+                volumeIcon.className = "fa-solid fa-volume-xmark text-rose-400";
+            } else {
+                volumeIcon.className = "fa-solid fa-volume-high";
+            }
+        });
+
+        /* ----------------------------------------------------
+           MOBILE DRAWER TOGGLE
+        ---------------------------------------------------- */
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+            mobileDrawer.classList.toggle('flex');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                mobileDrawer.classList.remove('flex');
+            });
+        });
+
+        /* ----------------------------------------------------
+           3D CARD FLIP
+        ---------------------------------------------------- */
+        function toggleFlip(cardElement) {
+            cardElement.classList.toggle('flipped');
+        }
+
+        /* ----------------------------------------------------
+           LOVE LETTER ENVELOPE MODAL
+        ---------------------------------------------------- */
+        const envelope = document.getElementById('envelope');
+        const letterModal = document.getElementById('letterModal');
+
+        function openEnvelope() {
+            envelope.classList.add('open');
+            setTimeout(() => {
+                letterModal.classList.remove('hidden');
+                setTimeout(() => {
+                    letterModal.classList.remove('opacity-0');
+                }, 10);
+            }, 600);
+        }
+
+        function closeLetterModal() {
+            letterModal.classList.add('opacity-0');
+            setTimeout(() => {
+                letterModal.classList.add('hidden');
+                envelope.classList.remove('open');
+            }, 500);
+        }
+
+        /* ----------------------------------------------------
+           INTERACTIVE CANDLES & CONFETTI
+        ---------------------------------------------------- */
+        let blownCount = 0;
+
+        function blowCandle(candleEl) {
+            const flame = candleEl.querySelector('.flame');
+            if (flame && !flame.classList.contains('off')) {
+                flame.classList.add('off');
+                blownCount++;
+
+                confetti({
+                    particleCount: 30,
+                    spread: 50,
+                    origin: { y: 0.7 }
+                });
+
+                if (blownCount === 3) {
+                    setTimeout(() => {
+                        confetti({
+                            particleCount: 180,
+                            spread: 100,
+                            origin: { y: 0.6 }
+                        });
+                    }, 300);
+                }
+            }
+        }
+
+        document.getElementById('celebrateBtn').addEventListener('click', () => {
+            const flames = document.querySelectorAll('.flame');
+            flames.forEach(f => f.classList.remove('off'));
+            blownCount = 0;
+
+            confetti({
+                particleCount: 120,
+                spread: 90,
+                origin: { y: 0.6 }
+            });
+        });
+    </script>
+</body>
+</html>
